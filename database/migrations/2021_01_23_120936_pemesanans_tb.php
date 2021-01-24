@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PemesananTb extends Migration
+class PemesanansTb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,24 @@ class PemesananTb extends Migration
      */
     public function up()
     {
-       Schema::create('pemesanans', function (Blueprint $table)
+       Schema::create('pemesanan', function (Blueprint $table)
        {
-           $table->increments('id_pemesanan');
+           $table->id('id_pemesanan');
            $table->string('kode_pemesanan');
-           $table->date('tanggal_pemesanan');
+           $table->dateTime('tanggal_pemesanan');
            $table->string('tempat_pemesanan');
-           $table->integer('id_pelanggan');
+           $table->unsignedBigInteger('id_pelanggan');
            $table->string('kode_kursi');
-           $table->integer('id_rute');
+           $table->unsignedBigInteger('id_rute');
            $table->string('tujuan');
-           $table->date('tanggal_berangkat');
+           $table->dateTime('tanggal_berangkat');
            $table->time('jam_cekin');
            $table->time('jam_berangkat');
            $table->string('total_bayar');
-           $table->integer('id_petugas');
+           $table->unsignedBigInteger('id_petugas');
+           $table->timestamps();
+
+           $table->foreign('id_pelanggan')->references('id_penumpang')->on('penumpang');
        });
     }
 
@@ -38,6 +41,6 @@ class PemesananTb extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pemesanan');
     }
 }

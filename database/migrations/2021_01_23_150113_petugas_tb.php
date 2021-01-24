@@ -13,13 +13,20 @@ class PetugasTb extends Migration
      */
     public function up()
     {
-        Schema::create('petugass', function (Blueprint $table)
+        Schema::create('petugas', function (Blueprint $table)
         {
-            $table->increments('id_petugas');
+            $table->id('id_petugas');
             $table->string('username');
             $table->string('password');
             $table->string('nama_petugas');
-            $table->integer('id_level');
+            $table->unsignedBigInteger('id_level');
+            $table->timestamps();
+
+        });
+
+        Schema::table('pemesanan', function (Blueprint $table)
+        {
+            $table->foreign('id_petugas')->references('id_petugas')->on('petugas');
         });
     }
 
@@ -30,6 +37,6 @@ class PetugasTb extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('petugas');
     }
 }

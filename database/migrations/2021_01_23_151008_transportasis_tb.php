@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TransportasiTb extends Migration
+class TransportasisTb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,20 @@ class TransportasiTb extends Migration
      */
     public function up()
     {
-        Schema::create('transportasis', function (Blueprint $table)
+        Schema::create('transportasi', function (Blueprint $table)
         {
-            $table->increments('id_transportasi');
+            $table->id('id_transportasi');
             $table->string('kode');
             $table->string('jumlah_kursi');
             $table->string('keterangan');
-            $table->integer('id_type_transportasi');
+            $table->unsignedBigInteger('id_type_transportasi');
+            $table->timestamps();
+
+        });
+
+        Schema::table('rute', function(Blueprint $table)
+        {
+            $table->foreign('id_transportasi')->references('id_transportasi')->on('transportasi');
         });
     }
 
@@ -30,6 +37,6 @@ class TransportasiTb extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('transportasi');
     }
 }

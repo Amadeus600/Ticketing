@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PenumpangTb extends Migration
+class PenumpangsTb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class PenumpangTb extends Migration
      */
     public function up()
     {
-        Schema::create('penumpangs', function (Blueprint $table)
+        Schema::create('penumpang', function (Blueprint $table)
         {
-            $table->increments('id_penumpang');
+            $table->id('id_penumpang');
             $table->string('username');
             $table->string('password');
             $table->string('nama_penumpang');
             $table->date('tanggal_lahir');
             $table->boolean('jenis_kelamin');
             $table->string('telephone');
+            $table->timestamps();
+
         });
+
     }
 
     /**
@@ -32,6 +35,6 @@ class PenumpangTb extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('penumpang');
     }
 }

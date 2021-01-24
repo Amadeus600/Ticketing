@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LevelTb extends Migration
+class LevelsTb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,17 @@ class LevelTb extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table)
+        Schema::create('level', function (Blueprint $table)
         {
-            $table->increments('id_level');
+            $table->id('id_level');
             $table->string('nama_level');
+            $table->timestamps();
+
+        });
+
+        Schema::table('petugas', function (Blueprint $table)
+        {
+            $table->foreign('id_level')->references('id_level')->on('level');
         });
     }
 
@@ -27,6 +34,6 @@ class LevelTb extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('level');
     }
 }
