@@ -1,4 +1,4 @@
-@extends('layouts.')
+<!-- @extends('layouts.')
 
 @section('content')
     <div class="flex justify-center">
@@ -7,4 +7,4 @@
         </div>
     </div>
 
-@endsection
+@endsection -->
